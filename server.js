@@ -3,7 +3,6 @@ const userRouter = require('./userRouter');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-
 // Middlewares
 app.use(express.static('public')); // Suppose we have a public directory
 app.use(express.json()); // middleware to parse application/json content-type requests
@@ -16,7 +15,7 @@ const authorize = (req, res, next) => {
     next();
 };
 
-app.use('/user', authorize, userRouter);
+app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
     console.log(req.url);
