@@ -63,3 +63,26 @@ for (let i = 0; i < 5; i++) {
     }
     console.log('\n');
 }
+
+
+
+function* genF(msg) {
+    console.log(msg);               
+    let back = yield 10;            
+    console.log(back);              
+    yield 20;                       
+  } 
+  
+  let genInstance = genF('test');
+  let genInstance2 = genF('lest');
+  
+  let res = genInstance.next(5);    // logs 'test' as it is created with 'test'
+  console.log( res );               // { value: 10, done: false } 
+  
+  res = genInstance.next(6);        // logs 6
+  console.log( res );               // { value: 20, done: false }
+  
+  res = genInstance.next('!!!');
+
+  console.log( res );
+  genInstance2.next()  // logs 'lest' as it is created with 'lest'
