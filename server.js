@@ -1,4 +1,5 @@
 const express = require('express');
+const userRouter = require('./userRouter');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -14,6 +15,8 @@ const authorize = (req, res, next) => {
     }
     next();
 };
+
+app.use('/user', authorize, userRouter);
 
 app.get('/', (req, res) => {
     console.log(req.url);
