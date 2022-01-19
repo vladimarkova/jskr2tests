@@ -113,4 +113,30 @@ userRouter.get("/refresh", (req, res) => {
   });
 });
 
+userRouter.get("/logout", (req, res) => {
+  // On client, also delete the accessToken
+
+  const cookies = req.cookies;
+  if (!cookies?.jwt) {
+    return res.sendStatus(204); // OK and No Content
+  }
+
+  const refreshToken = cookies.jwt;
+
+  const foundUser = users.find(user => user.refreshToken === refreshToken);
+  if (!foundUser) {
+    // Clear cookie and sendStatus 204 NO Content
+    res.clearCookie('jwt', { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+
+    return res.sendStatus(204);
+  }
+
+  const otherUsers = users.filter(user => user.refreshToken !== foundUser.refreshToken);
+  const currentUser = {...foundUser, refreshToken: ''};
+  users = [...otherUsers, currentUser];
+
+  res.clearCookie('jwt', { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+  res.sendStatus(204);
+})
+
 module.exports = userRouter;
