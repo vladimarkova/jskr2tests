@@ -6,9 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS Tests KR2</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="/grid.js" defer></script>
+    <!-- <script src="/grid.js" defer></script> -->
+    <script src="/client.js" async defer></script>
 </head>
 <body>
     <div id="grid"></div>
+    <div id="root">
+        <template id="login-form-template">
+            <form id="login-form">
+                <label for="">Username</label>
+                <input placeholder="Enter username" name="username" id="username" type="text">
+                <label for="password">Password</label>
+                <input placeholder="Enter password" name="password" id="password" type="text">
+                <button type="submit" id="submit-btn">Login</button>
+            </form>
+        </template>
+    </div>
 </body>
 </html>

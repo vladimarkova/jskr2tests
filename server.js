@@ -1,10 +1,14 @@
 const express = require("express");
 const userRouter = require("./userRouter");
 const app = express();
+const cors = require('cors');
 const cookieParser = require("cookie-parser");
 
 const PORT = process.env.PORT || 3000;
 // Middlewares
+
+app.use(cors());
+
 app.use(express.static("public")); // Suppose we have a public directory
 
 app.use(express.json()); // middleware to parse application/json content-type requests
